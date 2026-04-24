@@ -1,13 +1,14 @@
+package second_task;
+
 public class Polynom {
-  static class Polynome {
     private int n;        // количество коэффициентов, или же длинна полинома.
     private double[] arr; // массив коэффициентов, где значение - число, индекс - степень.
 
-    Polynome(double[] arr){
+    Polynom(double[] arr){
       set(arr);
     }
 
-    Polynome(int n){
+    Polynom(int n){
       set(n, 0);
     }
 
@@ -51,21 +52,23 @@ public class Polynom {
       for(int i = 1; i < n; i++){
         System.out.print(" + " + arr[i] + "x^" + i );
       }
+      System.out.println();
+      System.out.println();
     }
 
     // сложение полиномов;
-    public Polynome plus(Polynome p1) {
-      Polynome p2;
+    public Polynom plus(Polynom p1) {
+      Polynom p2;
       if (this.n >= p1.n) {
 
-        p2 = new Polynome(this.arr);
+        p2 = new Polynom(this.arr);
         for (int i = 0; i < p1.n; i++){
           p2.arr[i] += p1.arr[i];
         }
 
       } else {
 
-        p2 = new Polynome(p1.arr);
+        p2 = new Polynom(p1.arr);
         for (int i = 0; i < this.n; i++){
           p2.arr[i] += this.arr[i];
         }
@@ -74,8 +77,8 @@ public class Polynom {
       return p2;
     }
     // скалярное умножение
-    public Polynome prod(double coefficient){
-      Polynome copy = new Polynome(this.arr);
+    public Polynom prod(double coefficient){
+      Polynom copy = new Polynom(this.arr);
 
       for(int i = 0; i < copy.n; i++){
         copy.arr[i] *= coefficient;
@@ -83,9 +86,21 @@ public class Polynom {
 
       return copy;
     }
+    public Polynom prod(Polynom p){
+      int resultLength = this.arr.length + p.arr.length - 1;
+      Polynom result = new Polynom(resultLength);
+
+      for (int i = 0; i < this.arr.length; i++) {
+        for (int j = 0; j < p.arr.length; j++) {
+          result.arr[i + j] += this.arr[i] * p.arr[j];
+        }
+      }
+
+      return result;
+    }
 
     // деление на число
-    public Polynome div(double z){
+    public Polynom div(double z){
       if(z == 0) {
         throw new ArithmeticException("You can't use 0 in divide operation. ");
       }
@@ -93,12 +108,12 @@ public class Polynom {
     }
 
     // производная первого типа
-    public Polynome diff(){
-      if(this.n == 1) return new Polynome(1);
+    public Polynom diff(){
+      if(this.n == 1) return new Polynom(1);
 
       int diffedDegree = this.n - 1;
 
-      Polynome diffedPolynom = new Polynome(diffedDegree);
+      Polynom diffedPolynom = new Polynom(diffedDegree);
 
 
       for(int i = 0; i < diffedDegree; i++){
@@ -107,25 +122,28 @@ public class Polynom {
 
       return diffedPolynom;
     }
-    public Polynome diff(int j){
-      if(j >= this.arr.length) return new Polynome(1);
+
+    public Polynom diff(int j){
+      if(j >= this.arr.length) return new Polynom(1);
 
       if(j > 0){
         return diff().diff(j - 1);
       }
 
       // j = 0, производная нуля, это и есть сам полином.
-      return new Polynome(this.arr);
+      return new Polynom(this.arr);
+    }
+
+    public Polynom minus(Polynom p){
+      return plus(p.prod(-1));
+    }
+
+    static boolean equals(Polynom a, Polynom b) {
+      if (a.n != b.n) return false;
+      for (int i = 0; i < a.n; i++) {
+        if (a.arr[i] != b.arr[i]) return false;
+      }
+      return true;
     }
   }
 
-  public static void main(String[] args){
-    Polynome polynome1 = new Polynome(new double[]{1.0, 2.0, 3.0, 4.0});
-    Polynome polynome2 = new Polynome(new double[]{10.0, 20.0, 30.0, 40.0});
-
-    Polynome p = polynome1.diff(4);
-    p.print();
-
-
-  }
-}
