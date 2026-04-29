@@ -1,27 +1,25 @@
-package third_task;
-
-import java.math.BigInteger;
-;
-
-public class MathRealisation {
-  private static final double pi = Math.PI;
+package fourth_task;
 
 
-  static public double getPi(){
+public class MathStaticless {
+  private final double pi = Math.PI;
+
+
+    public double getPi(){
     return pi;
   }
 
 
-  static public double exp(int x){
+    public double exp(int x){
 
     double exp = 1;
     for(int i = 1; i < 10; i++){
-      exp += (MathRealisation.power(x, i) / MathRealisation.factorial(i));
+      exp += (this.power(x, i) / this.factorial(i));
     }
     return exp;
   }
 
-  static public double factorial(int value){
+    public double factorial(int value){
     if(value < 0){
       throw new Error("Значення для обчислювального факторiaлу повинно буде бiльше за нуль");
     }
@@ -38,7 +36,7 @@ public class MathRealisation {
 
   }
 
-  static public double power(double x, double n){
+    public double power(double x, double n){
     if(n == 1) return x;
 
 
@@ -51,15 +49,15 @@ public class MathRealisation {
     return power;
   }
 
-  static public double sin(double x){
+    public double sin(double x){
     double result = x;
     int sign = 1;
     for(int i = 3; i < 11; i+=2){
       if(sign == 1){
-        result -= MathRealisation.power(x, i) / MathRealisation.factorial(i);
+        result -= this.power(x, i) / this.factorial(i);
         sign--;
       } else {
-        result += MathRealisation.power(x, i) / MathRealisation.factorial(i);
+        result += this.power(x, i) / this.factorial(i);
         sign++;
       }
     }
@@ -67,23 +65,23 @@ public class MathRealisation {
     return result;
   }
 
-  static public double cos(double x){
+    public double cos(double x){
     double result = 1;
     int sign = 1;
     for(int i = 2; i < 11; i+=2){
       if(sign == 1){
-        result -= MathRealisation.power(x, i) / MathRealisation.factorial(i);
+        result -= this.power(x, i) / this.factorial(i);
         sign--;
       } else {
-        result += MathRealisation.power(x, i) / MathRealisation.factorial(i);
+        result += this.power(x, i) / this.factorial(i);
         sign++;
       }
     }
     return result;
   }
 
-  static public double besellJ(double x, int n){
-    double term = MathRealisation.power(x / 2.0, n);
+    public double besellJ(double x, int n){
+    double term = this.power(x / 2.0, n);
     for (int i = 1; i <= n; i++) {
       term /= i;
     }
@@ -100,7 +98,7 @@ public class MathRealisation {
 
   }
 
-  static double FourSin(double x, double[] coefficients, double L) {
+    double FourSin(double x, double[] coefficients, double L) {
     double sum = 0;
 
     for (int i = 0; i < coefficients.length; i++) {
@@ -111,7 +109,7 @@ public class MathRealisation {
     return sum;
   }
 
-  static double FourCos(double x, double[] coefficients, double L) {
+    double FourCos(double x, double[] coefficients, double L) {
     double sum = 0;
 
     for (int i = 0; i < coefficients.length; i++) {
