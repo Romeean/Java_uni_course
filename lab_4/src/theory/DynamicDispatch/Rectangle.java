@@ -9,6 +9,4 @@ public class Rectangle extends Figure {
   public double area(){
     return getA() * getB();
   }
-
-
 }
