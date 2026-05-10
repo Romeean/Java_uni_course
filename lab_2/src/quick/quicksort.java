@@ -1,3 +1,5 @@
+package quick;
+
 public class quicksort {
   public static void quick_sort(double[] arr, int left, int right){
 

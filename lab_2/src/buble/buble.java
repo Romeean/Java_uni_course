@@ -1,3 +1,5 @@
+package buble;
+
 public class buble {
   public static void buble_sort(double[] arr){
     double temp;
@@ -16,7 +18,6 @@ public class buble {
       }
     }
   }
-
   public static void main(String[] args){
     if(args.length != 1){
       System.out.println("На вхiд приймається лише 1 аргумент - розмiр масиву.");
@@ -41,7 +42,5 @@ public class buble {
     buble_sort(arr);
     long time2 = System.currentTimeMillis();
     System.out.println("Time = " + (double)(time2 - time1)/1000 + "s");
-
-
   }
 }

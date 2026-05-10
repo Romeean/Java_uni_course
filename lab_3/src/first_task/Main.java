@@ -1,9 +1,6 @@
 package first_task;
-import first_task.Point;
-import first_task.Vehicle;
-import first_task.Direction;
 
-public class MainVehicle {
+public class Main {
   public static void main(String[] args){
     Point point = new Point(1, 1);
 

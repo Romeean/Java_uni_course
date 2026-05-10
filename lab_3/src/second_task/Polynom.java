@@ -1,8 +1,8 @@
 package second_task;
 
 public class Polynom {
-    private int n;        // количество коэффициентов, или же длинна полинома.
-    private double[] arr; // массив коэффициентов, где значение - число, индекс - степень.
+    private int n;        // кількість коєфіціентів поліному.
+    private double[] arr; // масив коєфіціентів.
 
     Polynom(double[] arr){
       set(arr);
@@ -37,7 +37,7 @@ public class Polynom {
       set(n, 0);
     }
 
-    // найти значение полинома при x = n;
+    // значення поліному при певному x;
     public double value(double value){
       double sum = 0;
       for(int i = 0; i < this.arr.length; i++){
@@ -46,7 +46,7 @@ public class Polynom {
       }
       return sum;
     }
-    // красивый вывод полинома
+    // вивід поліному
     public void print(){
       System.out.print(arr[0]);
       for(int i = 1; i < n; i++){
@@ -56,7 +56,7 @@ public class Polynom {
       System.out.println();
     }
 
-    // сложение полиномов;
+    // сума поліномів
     public Polynom plus(Polynom p1) {
       Polynom p2;
       if (this.n >= p1.n) {
@@ -76,7 +76,7 @@ public class Polynom {
       }
       return p2;
     }
-    // скалярное умножение
+    // скалярне множення на певний коєфіцієнт
     public Polynom prod(double coefficient){
       Polynom copy = new Polynom(this.arr);
 
@@ -86,6 +86,7 @@ public class Polynom {
 
       return copy;
     }
+    // скалярне множення поліному на поліном
     public Polynom prod(Polynom p){
       int resultLength = this.arr.length + p.arr.length - 1;
       Polynom result = new Polynom(resultLength);
@@ -99,7 +100,7 @@ public class Polynom {
       return result;
     }
 
-    // деление на число
+    // ділення на число
     public Polynom div(double z){
       if(z == 0) {
         throw new ArithmeticException("You can't use 0 in divide operation. ");
@@ -107,7 +108,7 @@ public class Polynom {
       return prod(1 / z);
     }
 
-    // производная первого типа
+    // похідна першого типу
     public Polynom diff(){
       if(this.n == 1) return new Polynom(1);
 
@@ -122,15 +123,15 @@ public class Polynom {
 
       return diffedPolynom;
     }
+    // похідна n-ного типу
+    public Polynom diff(int n){
+      if(n >= this.arr.length) return new Polynom(1);
 
-    public Polynom diff(int j){
-      if(j >= this.arr.length) return new Polynom(1);
-
-      if(j > 0){
-        return diff().diff(j - 1);
+      if(n > 0){
+        return diff().diff(n - 1);
       }
 
-      // j = 0, производная нуля, это и есть сам полином.
+      // n = 0, похідна нуля, це сам поліном.
       return new Polynom(this.arr);
     }
 

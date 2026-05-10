@@ -7,10 +7,9 @@ public class Vehicle {
   private int year;
   private double mileage;
 
-  // используемые переменные
   private Point point;
   private int moveSpeed; // количество значений пройденных за 1 шаг
-  private double fuel; // количество топлива
+  private double fuel;   // количество топлива
 
   public Vehicle(String type, String model, int year, double mileage, Point point, int moveSpeed, double fuel){
     this.type = type;

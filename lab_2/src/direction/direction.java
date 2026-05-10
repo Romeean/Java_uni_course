@@ -1,15 +1,17 @@
-public class insertionsort {
-  public static void insertion_sort(double[] arr){
-    for(int i = 1; i < arr.length; i++){
-      double key = arr[i];
-      int j = i - 1;
+package direction;
 
-      while(j >= 0 && arr[j] > key) {
-        arr[j + 1] = arr[j];
-        j = j - 1;
+public class direction {
+  public static void direction_sort(double[] arr){
+    double temp;
+
+    for(int i = 0; i < arr.length - 1; i++){
+      for(int j = i + 1; j < arr.length; j++){
+        if(arr[i] > arr[j]){
+          temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
       }
-      arr[j + 1] = key;
-
     }
   }
 
@@ -34,10 +36,8 @@ public class insertionsort {
     }
 
     long time1 = System.currentTimeMillis();
-    insertion_sort(arr);
+    direction_sort(arr);
     long time2 = System.currentTimeMillis();
     System.out.println("Time = " + (double)(time2 - time1)/1000 + "s");
-
-
   }
 }

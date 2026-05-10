@@ -1,18 +1,18 @@
-public class direction {
-  public static void direction_sort(double[] arr){
-    double temp;
+package insertion;
 
-    for(int i = 0; i < arr.length - 1; i++){
-      for(int j = i + 1; j < arr.length; j++){
-        if(arr[i] > arr[j]){
-          temp = arr[i];
-          arr[i] = arr[j];
-          arr[j] = temp;
-        }
+public class insertionsort {
+  public static void insertion_sort(double[] arr){
+    for(int i = 1; i < arr.length; i++){
+      double key = arr[i];
+      int j = i - 1;
+
+      while(j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j = j - 1;
       }
+      arr[j + 1] = key;
+
     }
-
-
   }
 
   public static void main(String[] args){
@@ -36,7 +36,7 @@ public class direction {
     }
 
     long time1 = System.currentTimeMillis();
-    direction_sort(arr);
+    insertion_sort(arr);
     long time2 = System.currentTimeMillis();
     System.out.println("Time = " + (double)(time2 - time1)/1000 + "s");
 
