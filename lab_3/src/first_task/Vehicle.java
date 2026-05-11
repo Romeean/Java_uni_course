@@ -41,27 +41,34 @@ public class Vehicle {
   }
 
   public void moveTo(Direction direction, int steps){
+
+    if(steps < 0){
+      throw new ArithmeticException("Вiдстань не може бути меньшою за нуль");
+    }
+
     int distance = steps * this.getMoveSpeed();
     double updatedFuel = getFuel() - (distance * 0.7);
     if(updatedFuel < 0){
-      System.out.println("You don't have enough fuel.");
+      System.out.println("Недостатння кiлькiсть пального");
     }
-    switch(direction){
-      case Down: {
-        this.point.setY(point.getY() - (steps * getMoveSpeed()));
-      }
-      case Up: {
-        this.point.setY(point.getY() + (steps * getMoveSpeed()));
-      }
-      case Left: {
-        this.point.setX(point.getX() - (steps * getMoveSpeed()));
-      }
-      case Right: {
-        this.point.setX(point.getX() + (steps * getMoveSpeed()));
-      }
+    if(updatedFuel > 0){
+      switch(direction){
+        case Down: {
+          this.point.setY(point.getY() - (steps * getMoveSpeed()));
+        }
+        case Up: {
+          this.point.setY(point.getY() + (steps * getMoveSpeed()));
+        }
+        case Left: {
+          this.point.setX(point.getX() - (steps * getMoveSpeed()));
+        }
+        case Right: {
+          this.point.setX(point.getX() + (steps * getMoveSpeed()));
+        }
 
-      this.setFuel(updatedFuel);
-
+        this.setFuel(updatedFuel);
+      }
     }
+
   }
 }

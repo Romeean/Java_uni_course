@@ -1,6 +1,6 @@
 package fourth_task;
 
-public class MainMath {
+public class Main {
   public static void main(String[] args){
     MathStaticless math = new MathStaticless();
 
@@ -22,7 +22,7 @@ public class MainMath {
     // Cos
     System.out.println("Cos(1): " + math.cos(1));
 
-    // Bessel (J₀(2.404825558) ≈ 0)
+    // Bessel (J₀(2.404825558 0))
     System.out.println("Функцiя Бесселя J при (2.404825558): " + math.besellJ(2.404825558, 0));
 
     // FourSin

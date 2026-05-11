@@ -1,11 +1,11 @@
 package third_task;
 
-public class MainMath {
+public class Main {
   public static void main(String[] args){
 
     // Pi
     double pi = MathRealisation.getPi();
-    System.out.println("Число π: " + pi);
+    System.out.println("Число pi: " + pi);
 
     // Factorial
     double factorial = MathRealisation.factorial(5);
@@ -28,7 +28,7 @@ public class MainMath {
     System.out.println("Cos(1): " + cos);
 
     // Bessel (перевiряємо що J при 2.404825558)
-    double bessel = MathRealisation.besellJ(2.404825558, 0);
+    double bessel = MathRealisation.besselJ(2.404825558, 0);
     System.out.println("Функцiя Бесселя J(2.404825558): " + bessel);
 
     // FourSin

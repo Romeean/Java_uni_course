@@ -1,8 +1,7 @@
 package second_task;
-import second_task.Polynom;
 
 
-public class MainPolynom {
+public class Main {
   public static void main(){
 
     Polynom Polynom1 = new Polynom(new double[]{1.0, 2.0, 3.0, 4.0});
