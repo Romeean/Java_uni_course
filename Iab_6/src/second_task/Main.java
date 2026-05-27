@@ -24,11 +24,11 @@ public class Main {
     CarInformation certainCar = linkedListCar.get(10);
 
     // дозволяється визначити індекс заданого об’єкту у списку;
-    int index = linkedListCar.get(certainCar);
+    int index = linkedListCar.indexOf(certainCar);
 
     // дозволяється отримати набір елементів у вигляді окремого
     // списку, що знаходяться у списку між індексами start та end;
-    LinkedListCar linkedListSnapshot = linkedListCar.snapshot(0, 6);
+    LinkedListCar linkedListSnapshot = linkedListCar.subList(0, 6);
 
     // дозволяється виконати сортування за допомогою певного
     // компаратора та виведенням результату сортування;

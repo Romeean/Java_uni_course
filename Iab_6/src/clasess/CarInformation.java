@@ -1,4 +1,6 @@
 package clasess;
+import java.util.Objects;
+
 
 public class CarInformation {
   private double milesPerGallon; // 1 галон = 3,78 лiтра
@@ -87,22 +89,6 @@ public class CarInformation {
     return name;
   }
 
-  public boolean isEqual(CarInformation right){
-    if(this.getMilesPerGallon() == right.getMilesPerGallon() &&
-      this.getCylinders() == right.getCylinders() &&
-      this.getDisplacement() == right.getDisplacement() &&
-      this.getHorsepower() == right.getHorsepower() &&
-      this.getWeight() == right.getWeight() &&
-      this.getAcceleration() == right.getAcceleration() &&
-      this.getYear() == right.getYear() &&
-      this.getOrigin() == right.getOrigin() &&
-      this.getName().equals(right.getName())
-    ){
-      return true;
-    }
-    return false;
-  }
-
   public void print(){
     System.out.println("Miles Per gallon: " + milesPerGallon);
     System.out.println("Cylinders: " + cylinders);
@@ -116,34 +102,48 @@ public class CarInformation {
 
     System.out.println();
   }
+
+  @Override
+  public boolean equals(Object o){
+    if(this == o) return true;
+
+    if(o == null || this.getClass() != o.getClass()) return false;
+
+    CarInformation car = (CarInformation) o;
+
+    return
+      this.getMilesPerGallon() == car.getMilesPerGallon() &&
+      this.getCylinders()      == car.getCylinders()      &&
+      this.getDisplacement()   == car.getDisplacement()   &&
+      this.getHorsepower()     == car.getHorsepower()     &&
+      this.getWeight()         == car.getWeight()         &&
+      this.getAcceleration()   == car.getAcceleration()   &&
+      this.getYear()           == car.getYear()           &&
+      this.getOrigin()         == car.getOrigin()         &&
+      Objects.equals(this.getName(), car.getName());
+  }
+
+
   @Override
   public String toString(){
     return (
-            "MilesPerGallon: " + milesPerGallon + "\n" +
-            "Cylinders: " + cylinders + "\n" +
-            "Displacement: " + displacement + "\n" +
-            "horsepower: " + horsepower + "\n" +
-            "weight: " + weight + "\n" +
-            "year: " + year + "\n" +
-            "origin: " + origin + "\n" +
-            "name: " + name + "\n" + "\n");
-
+      "MilesPerGallon: " + milesPerGallon + "\n" +
+      "Cylinders: " + cylinders + "\n" +
+      "Displacement: " + displacement + "\n" +
+      "horsepower: " + horsepower + "\n" +
+      "weight: " + weight + "\n" +
+      "year: " + year + "\n" +
+      "origin: " + origin + "\n" +
+      "name: " + name + "\n" + "\n"
+    );
   }
+
 
   @Override
   public int hashCode(){
-    int result = 17;
-
-    result = 31 * result + Double.hashCode(milesPerGallon);
-    result = 31 * result + Integer.hashCode(cylinders);
-    result = 31 * result + Double.hashCode(displacement);
-    result = 31 * result + Integer.hashCode(horsepower);
-    result = 31 * result + Double.hashCode(weight);
-    result = 31 * result + Double.hashCode(acceleration);
-    result = 31 * result + Integer.hashCode(year);
-    result = 31 * result + Integer.hashCode(origin);
-    result = 31 * result + name.hashCode();
-
-    return result;
+    return Objects.hash(getMilesPerGallon(), getCylinders(),
+      getDisplacement(), getHorsepower(), getWeight(), getAcceleration(),
+      getYear(), getOrigin(), getName()
+    );
   }
 }

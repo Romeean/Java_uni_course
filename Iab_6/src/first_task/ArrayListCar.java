@@ -7,26 +7,37 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 
 
 public class ArrayListCar extends AbstractList<CarInformation> {
   ArrayList<CarInformation> arr = new ArrayList<>();
 
   @Override
-  public int size() {
+  public int size(){
     return this.arr.size();
   }
 
   @Override
-  public CarInformation get(int index) {
+  public CarInformation get(int index){
+    if(index < 0 || index >= this.arr.size()){
+      throw new IndexOutOfBoundsException("переданий iндекс поза межами масиву");
+    }
     return this.arr.get(index);
   }
 
-  public int indexOf(CarInformation carInformation){
-    return arr.indexOf(carInformation);
+  @Override
+  public int indexOf(Object o){
+    CarInformation carInformation = (CarInformation) o;
+
+    if(carInformation == null){
+      throw new IllegalArgumentException("переданий екземпляр має значення null");
+    }
+    return this.arr.indexOf(carInformation);
   }
 
-  public ArrayListCar snapshot(int start, int end){
+  @Override
+  public ArrayListCar subList(int start, int end){
     if(start < 0){
       throw new IllegalArgumentException("Позицiя старту не може бути менше за нуль.");
     }
@@ -49,10 +60,12 @@ public class ArrayListCar extends AbstractList<CarInformation> {
     return this.arr.add(car);
   }
 
-  public void foreach(){
-    for(int i = 0; i < arr.size(); i++){
-      CarInformation car = arr.get(i);
-      car.print();
+  public void foreach(Consumer<CarInformation> action) {
+    if (action == null) {
+      throw new IllegalArgumentException("Action не може бути null.");
+    }
+    for (CarInformation car : arr) {
+      action.accept(car);
     }
   }
 
@@ -77,12 +90,13 @@ public class ArrayListCar extends AbstractList<CarInformation> {
     if (c == null) {
       throw new IllegalArgumentException("Об'єкт не може бути null.");
     }
-    if (!arr.contains(c)) {
+
+    boolean isExist = arr.contains(c);
+
+    if (!isExist) {
       throw new IllegalArgumentException("Такого об'єкту немає в масиві.");
     }
 
-    return arr.remove(c);
+    return true;
   }
-
-
 }

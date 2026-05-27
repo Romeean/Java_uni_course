@@ -10,19 +10,17 @@ public class Main {
     CsvManipulation.CsvReader(path, carArr);
 
     // послідовно виводяться данні з ArrayList за допомогою циклу for each;
-    for(CarInformation car : carArr){
-      car.print();
-    }
+    carArr.foreach(car -> car.print());
 
     // дозволяється повернути об’єкт зі списку за певним індексом;
     CarInformation car = carArr.get(10);
 
     // дозволяється визначити індекс заданого об’єкту у списку;
-    carArr.indexOf(car);
+    int index = carArr.indexOf(car);
 
     // дозволяється отримати набір елементів у вигляді окремого
     // списку, що знаходяться в ArrayList між індексами start та end;
-    ArrayListCar arrSnapshot = carArr.snapshot(0, 8);
+    ArrayListCar arrSnapshot = carArr.subList(0, 8);
 
     // дозволяється виконати сортування за допомогою певного
     // компаратора та виведенням результату сортування;

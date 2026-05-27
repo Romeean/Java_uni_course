@@ -25,22 +25,26 @@ public class LinkedListCar extends LinkedList<CarInformation> {
   }
 
   @Override
-  public CarInformation get(int i){
-    return linkedList.get(i);
-  }
-
-  public int get(CarInformation c){
-    CarInformation car;
-    for(int i = 0; i < linkedList.size(); i++){
-      car = linkedList.get(i);
-
-      if(car.isEqual(c)){
-        return i;
-      }
-
+  public CarInformation get(int index){
+    if(index < 0 || index > linkedList.size()){
+      throw new IndexOutOfBoundsException("переданий iндекс поза межами масиву");
     }
-    return -1;
+
+    return linkedList.get(index);
   }
+
+  @Override
+  public int indexOf(Object o){
+
+    CarInformation car = (CarInformation) o;
+
+    if(car == null) {
+      throw new IllegalArgumentException("переданий екземпляр має значення null");
+    }
+
+    return this.linkedList.indexOf(car);
+  }
+
   @Override
   public CarInformation getFirst(){
     return linkedList.getFirst();
@@ -59,14 +63,14 @@ public class LinkedListCar extends LinkedList<CarInformation> {
     }
   }
 
-
   public void print(){
     for(CarInformation c : linkedList) {
       c.print();
     }
   }
 
-  public LinkedListCar snapshot(int start, int end){
+
+  public LinkedListCar subList(int start, int end){
     if(start < 0){
       throw new IllegalArgumentException("Позицiя старту не може бути менше за нуль.");
     }
@@ -76,14 +80,14 @@ public class LinkedListCar extends LinkedList<CarInformation> {
     if(start > end){
       throw new IllegalArgumentException("Позицiя старту не може бути бiльшою за позицiю кiнця.");
     }
-    LinkedListCar snapshot = new LinkedListCar();
+    LinkedListCar sublist = new LinkedListCar();
 
     for(int i = start; i <= end; i++){
       CarInformation record = linkedList.get(i);
-      snapshot.linkedList.add(record);
+      sublist.linkedList.add(record);
     }
 
-    return snapshot;
+    return sublist;
   }
 
   @Override
@@ -93,6 +97,9 @@ public class LinkedListCar extends LinkedList<CarInformation> {
 
   @Override
   public CarInformation remove(int index){
+    if(index < 0 || index > linkedList.size()){
+      throw new IndexOutOfBoundsException("переданий iндекс поза межами масиву");
+    }
     return linkedList.remove(index);
   }
 
@@ -100,11 +107,12 @@ public class LinkedListCar extends LinkedList<CarInformation> {
     if (c == null) {
       throw new IllegalArgumentException("Об'єкт не може бути null.");
     }
-    if (!linkedList.contains(c)) {
-      throw new IllegalArgumentException("Такого об'єкту немає в масивi.");
+    boolean isExist = linkedList.remove(c);
+
+    if (!isExist) {
+      throw new IllegalArgumentException("Такого об'єкту немає.");
     }
 
-    return linkedList.remove(c);
+    return true;
   }
-
 }
